@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 %define __strip /bin/true
 
-%define targetname     rcar_h3ulcb_cr7
-%define firmwarename   hello-world
-%define filename       zephyr-%{firmwarename}-%{targetname}
+%define targetname      qemu_x86_64
+%define targettoolchain x86_64
+%define firmwarename    hello-world
+%define filename        zephyr-%{firmwarename}-%{targetname}
 
 Name: zephyr-hello-world
-#Hexsha: 3c4ce801fdf6d7fe8babf3c3cf0255c5a57a646a
 Version: 0.0.0
 Release: 0%{?dist}
 Summary: Zephyr hello world application
@@ -14,11 +14,10 @@ Summary: Zephyr hello world application
 License: _TO_COMPLETE_
 URL: https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/hello_world
 
-#Main Zephyr require
+# Required Zephyr packages
 BuildRequires: zephyr-kernel
 BuildRequires: zephyr-kernel-modules-common
-#Needed Zephyr toolchain
-BuildRequires: zephyr-toolchain-arm
+BuildRequires: zephyr-toolchain-%{targettoolchain}
 
 %description
 Zephyr in tree hello-world application
@@ -28,11 +27,18 @@ cp -a %{_zephyrkerneldir}/samples/hello_world/. .
 
 %build
 %{westbuild} -b %{targetname} .
+%if "%{targetname}" == "qemu_x86_64"
+cd build && ninja qemu_locore_image_target qemu_main_image_target
+%endif
 
 %install
 %{__install} -d %{buildroot}/lib/firmware
-%{__install} -m 755 build/zephyr/zephyr.bin %{buildroot}/lib/firmware/%{filename}.bin
-%{__install} -m 755 build/zephyr/zephyr.elf %{buildroot}/lib/firmware/%{filename}.elf
+%{__install} -m 755 build/zephyr/zephyr.elf %{buildroot}/lib/firmware/%{filename}.elf | true
+%{__install} -m 755 build/zephyr/zephyr.bin %{buildroot}/lib/firmware/%{filename}.bin | true
+%{__install} -m 755 build/zephyr/zephyr.hex %{buildroot}/lib/firmware/%{filename}.hex | true
+%if "%{targetname}" == "qemu_x86_64"
+%{__install} -m 755 build/zephyr/zephyr*qemu*.elf %{buildroot}/lib/firmware/ | true
+%endif
 
 %files
 /lib/firmware
