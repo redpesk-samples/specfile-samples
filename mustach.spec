@@ -3,9 +3,8 @@
 #---------------------------------------------
 
 Name:           mustach
-#Hexsha: None
-Version: 1.2.0
-Release: 2%{?dist}
+Version:        1.2.9
+Release:        2%{?dist}
 License:        ISC
 Summary:        Tiny Mustach processor
 Url:            https://gitlab.com/jobol/mustach
@@ -123,6 +122,9 @@ Development files for application Framework Binder core library
 
 #---------------------------------------------
 %changelog
+
+* Thu Jun 13 2024 Sébastien Douheret sebastien@iot.bzh 1.2.9
+- Bump to 1.2.9
 
 * Thu Oct 07 2021 José Bollo jose.bollo@iot.bzh 1.2.0
 - Initial version
