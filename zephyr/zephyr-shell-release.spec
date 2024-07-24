@@ -7,12 +7,12 @@
 %define filename        zephyr-%{firmwarename}-%{targetname}
 
 Name: zephyr-shell
-Version: 3.5.0
+Version: 0.0.0
 Release: 0%{?dist}
 Summary: Zephyr shell application
 
 License: _TO_COMPLETE_
-URL: https://github.com/iotbzh/zephyr-shell/tree/3.5.0
+URL: https://github.com/iotbzh/zephyr-shell/tree/release
 Source0: %{name}-%{version}.tar.gz
 
 # Required Zephyr packages
@@ -45,5 +45,5 @@ cd build && ninja qemu_locore_image_target qemu_main_image_target
 /lib/firmware
 
 %changelog
-* Thu Feb 22 2024 Aymeric Aillet <aymeric.aillet@iot.bzh> - 3.5.0-0
-- Package Zephyr shell app v3.5.0
+* Thu Feb 22 2024 Aymeric Aillet <aymeric.aillet@iot.bzh> - 0.0.0-0
+- Package Zephyr shell app tag: release
