@@ -12,7 +12,7 @@ Release: 0%{?dist}
 Summary: Zephyr shell application
 
 License: _TO_COMPLETE_
-URL: https://github.com/iotbzh/zephyr-shell
+URL: https://github.com/iotbzh/zephyr-shell/tree/lts2
 Source0: %{name}-%{version}.tar.gz
 
 # Required Zephyr packages
