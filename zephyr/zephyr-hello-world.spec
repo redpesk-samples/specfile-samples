@@ -3,6 +3,7 @@
 
 %define targetname      qemu_x86_64
 %define targettoolchain x86_64
+%define sample_path     samples/hello_world
 %define firmwarename    hello-world
 %define filename        zephyr-%{firmwarename}-%{targetname}
 
@@ -25,7 +26,7 @@ BuildRequires: zephyr-kernel-hal
 Zephyr in tree hello-world application
 
 %prep
-cp -a %{_zephyrkerneldir}/samples/hello_world/. .
+cp -a %{_zephyrkerneldir}/%{sample_path}/. .
 
 %build
 %{westbuild} -b %{targetname} .
