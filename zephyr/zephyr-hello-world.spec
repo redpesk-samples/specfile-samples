@@ -3,6 +3,7 @@
 
 %define targetname      qemu_x86_64
 %define targettoolchain x86_64
+%define sample_path     samples/hello_world
 %define firmwarename    hello-world
 %define filename        zephyr-%{firmwarename}-%{targetname}
 
@@ -16,14 +17,16 @@ URL: https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/hello_world
 
 # Required Zephyr packages
 BuildRequires: zephyr-kernel
-BuildRequires: zephyr-kernel-modules-common
 BuildRequires: zephyr-toolchain-%{targettoolchain}
+%if "%{targetname}" != "qemu_x86_64"
+BuildRequires: zephyr-kernel-hal
+%endif
 
 %description
 Zephyr in tree hello-world application
 
 %prep
-cp -a %{_zephyrkerneldir}/samples/hello_world/. .
+cp -a %{_zephyrkerneldir}/%{sample_path}/. .
 
 %build
 %{westbuild} -b %{targetname} .
