@@ -16,11 +16,17 @@ License: _TO_COMPLETE_
 URL: https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/hello_world
 
 # Required Zephyr packages
+%if "%{targetname}" == "qemu_x86_64"
+BuildRequires: zephyr-kernel-board-qemu_x86_64
+%elif "%{targetname}" == "imx8mp_evk/mimx8ml8/m7"
+BuildRequires: zephyr-kernel-board-imx8mp_evk_mimx8ml8_m7
+%else
 BuildRequires: zephyr-kernel
-BuildRequires: zephyr-toolchain-%{targettoolchain}
-%if "%{targetname}" != "qemu_x86_64"
 BuildRequires: zephyr-kernel-hal
+BuildRequires: zephyr-toolchain-%{targettoolchain}
 %endif
+
+BuildRequires: zephyr-kernel-samples
 
 %description
 Zephyr in tree hello-world application
